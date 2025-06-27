@@ -31,7 +31,6 @@ jobs:
   security_tests:
 
     needs: integration_tests
-
     runs-on: ubuntu-latest
 
     strategy:
