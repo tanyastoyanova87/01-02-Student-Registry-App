@@ -11,15 +11,19 @@ jobs:
   integration_tests:
 
     runs-on: ubuntu-latest
+
+    strategy:
+        matrix:
+            node-version: [18.x, 20.x, 22.x]
     
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v4
-    - name: Use Node.js 20
+    - name: Use Node.js ${{matrix.node-version}}
       uses: actions/setup-node@v4
       with:
-        node-version: 20
-    - name: Install dependancies
+        node-version: ${{matrix.node-version}}
+    - name: Install dependencies
       run: npm install
     - name: Run integration tests
       run: npm test
@@ -28,14 +32,18 @@ jobs:
     needs: integration_tests
 
     runs-on: ubuntu-latest
+
+    strategy:
+        matrix:
+            node-version: [18.x, 20.x, 22.x]
     
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v4
-    - name: Use Node.js 20
+    - name: Use Node.js ${{matrix.node-version}}
       uses: actions/setup-node@v4
       with:
-        node-version: 20
+        node-version: ${{matrix.node-version}}
     - name: Install dependencies
       run: npm install
     - name: Run security tests
